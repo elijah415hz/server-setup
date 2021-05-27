@@ -1,7 +1,7 @@
 # Serve Portfolio at the root domain
 test.elijahblaisdell.dev {
 	# set the root directory
-	root portfolio/build
+	root * ../portfolio/build
 
 	# Compress responses according to Accept-Encoding headers to speed things up where possible
 	encode gzip zstd
