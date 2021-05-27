@@ -1,0 +1,19 @@
+# Serve Portfolio at the root domain
+test.elijahblaisdell.dev {
+	# set the root directory
+	root portfolio/build
+
+	# Compress responses according to Accept-Encoding headers to speed things up where possible
+	encode gzip zstd
+
+	route {
+		# Direct routes starting with /api to the server on localhost:8000
+		# reverse_proxy /api* localhost:8000
+
+		# Direct anything that is not an api route or static file to index.html for React-Router
+		try_files {path} {path}/ /index.html
+
+		# Serve files!
+		file_server
+	}
+}
