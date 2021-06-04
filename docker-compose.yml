@@ -22,6 +22,44 @@ services:
     volumes:
       - ./ddclient-config:/config
     restart: always
+  bitwarden:
+    image: vaultwarden/server:latest
+    container_name: bitwarden
+    restart: always
+    ports:
+      - "8080:80"
+      - "3012:3012"
+    volumes:
+      - ./bw-data:/data
+  db:
+    image: linuxserver/mariadb:arm32v6-latest
+    restart: always
+    command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
+    volumes:
+      - db:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=TulipHyacinth
+      - MYSQL_PASSWORD=TulipHyacinth080518
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=nextcloud
+
+  nextcloud:
+    image: nextcloud
+    restart: always
+    ports:
+      - 8081:80
+    links:
+      - db
+    volumes:
+      - nextcloud:/var/www/html
+    environment:
+      - MYSQL_PASSWORD=TulipHyacinth080518
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=nextcloud
+      - MYSQL_HOST=db
+
 volumes:
   caddy_data:
   caddy_config:
+  nextcloud:
+  db:
