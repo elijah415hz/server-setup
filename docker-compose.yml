@@ -26,9 +26,6 @@ services:
     image: vaultwarden/server:latest
     container_name: bitwarden
     restart: always
-    ports:
-      - "8080:80"
-      - "3012:3012"
     volumes:
       - ./bw-data:/data
   db:
@@ -46,8 +43,6 @@ services:
   nextcloud:
     image: nextcloud
     restart: always
-    ports:
-      - 8081:80
     links:
       - db
     volumes:
@@ -63,3 +58,4 @@ volumes:
   caddy_config:
   nextcloud:
   db:
+  finances-db:

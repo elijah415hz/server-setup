@@ -35,3 +35,8 @@ passwords.elijahblaisdell.dev:443 {
 cloud.elijahblaisdell.dev:443 {
 	reverse_proxy nextcloud:80
 }
+
+# Forward traffic to finances app
+finances.elijahblaisdell.dev {
+	reverse_proxy finances-flask:8000
+}
