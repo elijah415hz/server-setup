@@ -22,13 +22,11 @@ services:
       - ./ddclient-config:/config
     restart: always
 
-  finances-web:
+  finances-app:
     image: elijah415hz/finances-flask
     restart: always
     ports:
       - 8000:8000
-    links:
-      - finances-db
     env_file:
       - '.env'
     volumes:
@@ -63,7 +61,7 @@ services:
     volumes:
       - ./bw-data:/data
 
-  db:
+  nextcloud_db:
     image: linuxserver/mariadb:arm32v6-latest
     restart: always
     command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
@@ -80,15 +78,13 @@ services:
     restart: always
     ports:
       - 8081:80
-    links:
-      - db
     volumes:
       - nextcloud:/var/www/html
     environment:
       - MYSQL_PASSWORD=TulipHyacinth080518
       - MYSQL_DATABASE=nextcloud
       - MYSQL_USER=nextcloud
-      - MYSQL_HOST=db
+      - MYSQL_HOST=nextcloud_db
 
 volumes:
   caddy_data:

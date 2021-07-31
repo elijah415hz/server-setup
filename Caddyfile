@@ -38,5 +38,5 @@ cloud.elijahblaisdell.dev:443 {
 
 # Forward traffic to finances app
 finances.elijahblaisdell.dev {
-	reverse_proxy finances-flask:8000
+	reverse_proxy finances-app:8000
 }
