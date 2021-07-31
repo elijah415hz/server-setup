@@ -1,36 +1,68 @@
-version: "3.7"
+version: '3.7'
 
 services:
   caddy:
     image: caddy:2.4.1
     restart: always
     ports:
-      - "80:80"
-      - "443:443"
+      - 80:80
+      - 443:443
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile
       - ../portfolio/build:/portfolio
       - caddy_data:/data
       - caddy_config:/config
+
   ddclient:
     image: ghcr.io/linuxserver/ddclient
     container_name: ddclient
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=America/New_York
+    env_file:
+      - '.env'
     volumes:
       - ./ddclient-config:/config
     restart: always
+
+  finances-web:
+    image: elijah415hz/finances-flask
+    restart: always
+    ports:
+      - 8000:8000
+    links:
+      - finances-db
+    env_file:
+      - '.env'
+    volumes:
+      - ../finances-flask:/usr/src/app
+
+  finances-db:
+    image: ghcr.io/linuxserver/mariadb
+    restart: always
+    volumes:
+      - finances-db:/config
+      - ../finances-flask/db:/config/initdb.d/
+    env_file:
+      - '.env'
+    ports:
+      - 3306:3306
+
+  cron:
+    image: elijah415hz/finances-cron
+    restart: always
+    volumes:
+      - ../finances-flask/cron:/usr/src/cron
+    env_file:
+      - '.env'
+
   bitwarden:
     image: vaultwarden/server:latest
     container_name: bitwarden
     restart: always
     ports:
-      - "8080:80"
-      - "3012:3012"
+      - 8080:80
+      - 3012:3012
     volumes:
       - ./bw-data:/data
+
   db:
     image: linuxserver/mariadb:arm32v6-latest
     restart: always
@@ -38,7 +70,6 @@ services:
     volumes:
       - db:/var/lib/mysql
     environment:
-      - MYSQL_ROOT_PASSWORD=TulipHyacinth
       - MYSQL_PASSWORD=TulipHyacinth080518
       - MYSQL_DATABASE=nextcloud
       - MYSQL_USER=nextcloud
@@ -63,3 +94,4 @@ volumes:
   caddy_config:
   nextcloud:
   db:
+  finances-db:
