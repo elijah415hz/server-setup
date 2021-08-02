@@ -23,7 +23,7 @@ services:
     restart: always
 
   finances-app:
-    image: elijah415hz/finances-flask
+    build: ../finances-flask
     restart: always
     ports:
       - 8000:8000
@@ -44,7 +44,7 @@ services:
       - 3306:3306
 
   cron:
-    image: elijah415hz/finances-cron
+    build: ../finances-flask/cron
     restart: always
     volumes:
       - ../finances-flask/cron:/usr/src/cron
