@@ -1,8 +1,6 @@
-{
-	debug
-}
+
 # Serve Portfolio at the test domain
-test.elijahblaisdell.dev {
+elijahblaisdell.dev {
 	# set the root directory
 	root * /portfolio
 
@@ -18,6 +16,10 @@ test.elijahblaisdell.dev {
 
 		# Serve files!
 		file_server
+	}
+
+	log {
+		output file /var/log/access.log
 	}
 }
 
@@ -39,4 +41,7 @@ cloud.elijahblaisdell.dev:443 {
 # Forward traffic to finances app
 finances.elijahblaisdell.dev {
 	reverse_proxy finances-app:8000
+	log {
+		output file /var/log/access.log
+	}
 }

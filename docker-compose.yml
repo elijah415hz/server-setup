@@ -12,6 +12,7 @@ services:
       - ../portfolio/build:/portfolio
       - caddy_data:/data
       - caddy_config:/config
+      - ../caddy_logs:/var/log
 
   ddclient:
     image: ghcr.io/linuxserver/ddclient
@@ -25,8 +26,6 @@ services:
   finances-app:
     image: elijah415hz/finances-flask
     restart: always
-    ports:
-      - 8000:8000
     env_file:
       - '.env'
     volumes:
@@ -40,8 +39,6 @@ services:
       - ../finances-flask/db:/config/initdb.d/
     env_file:
       - '.env'
-    ports:
-      - 3306:3306
 
   cron:
     image: elijah415hz/finances-cron
@@ -64,7 +61,6 @@ services:
   nextcloud_db:
     image: linuxserver/mariadb:arm32v6-latest
     restart: always
-    command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
     volumes:
       - db:/var/lib/mysql
     environment:
@@ -76,8 +72,6 @@ services:
   nextcloud:
     image: nextcloud
     restart: always
-    ports:
-      - 8081:80
     volumes:
       - nextcloud:/var/www/html
     environment:
