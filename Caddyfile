@@ -38,9 +38,26 @@ cloud.elijahblaisdell.dev:443 {
 	reverse_proxy nextcloud:80
 }
 
+# Forward Traffic to Collabora
+office.elijahblaisdell.dev {
+	encode gzip
+	reverse_proxy collabora:9980
+}
+
 # Forward traffic to finances app
 finances.elijahblaisdell.dev {
+	# Uncoment below if I ever want caddy to serve the files instead of flask app 
+	# (requires modification of at least /auth to /api/auth)
+	# route {
+	#	 Direct routes starting with /api to the server on localhost:8000
 	reverse_proxy finances-app:8000
+
+	#	 Direct anything that is not an api route or static file to index.html for React-Router
+	# 	 try_files {path} {path}/ /index.html
+
+	# 	 Serve files!
+	# 	file_server
+	# }
 	log {
 		output file /var/log/access.log
 	}
