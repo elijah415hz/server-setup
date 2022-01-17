@@ -48,6 +48,7 @@ office.elijahblaisdell.dev {
 finances.elijahblaisdell.dev {
 	# Uncoment below if I ever want caddy to serve the files instead of flask app 
 	# (requires modification of at least /auth to /api/auth)
+	# root * /finances
 	# route {
 	#	 Direct routes starting with /api to the server on localhost:8000
 	reverse_proxy finances-app:8000

@@ -10,9 +10,9 @@ services:
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile
       - ../portfolio/build:/portfolio
-      - ../finances-flask/build:
-      - ./caddy/caddy_data:/data
-      - ./caddy/caddy_config:/config
+      - ../finances-flask/build:/finances
+      - ./bind-mounts/caddy/caddy_data:/data
+      - ./bind-mounts/caddy/caddy_config:/config
       - ../caddy_logs:/var/log
 
   ddclient:
@@ -36,8 +36,8 @@ services:
     image: ghcr.io/linuxserver/mariadb
     restart: always
     volumes:
-      - ./finances-db/config:/config
-      - ./finances-db/db-files:/var/lib/mysql
+      - ./bind-mounts/finances-db/config:/config
+      - ./bind-mounts/finances-db/db-files:/var/lib/mysql
       - ../finances-flask/db:/docker-entrypoint-initdb.d
     env_file:
       - '.env'
@@ -58,13 +58,13 @@ services:
       - 8080:80
       - 3012:3012
     volumes:
-      - ./bw-data:/data
+      - ./bind-mounts/bw-data:/data
 
   nextcloud_db:
     image: linuxserver/mariadb:arm64v8-latest
     restart: always
     volumes:
-      - ./nextcloud_db:/var/lib/mysql
+      - ./bind-mounts/nextcloud_db:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=TulipHyacinth
       - MYSQL_PASSWORD=TulipHyacinth080518
@@ -75,7 +75,7 @@ services:
     image: nextcloud
     restart: always
     volumes:
-      - ./nextcloud:/var/www/html
+      - ./bind-mounts/nextcloud:/var/www/html
     environment:
       - MYSQL_PASSWORD=TulipHyacinth080518
       - MYSQL_DATABASE=nextcloud
