@@ -2,3 +2,4 @@ bitwarden_keys
 bw-data/
 build/
 ddclient-config/
+bind-mounts/

@@ -1,0 +1,8 @@
+{
+	"sans": [
+		"cloud.elijahblaisdell.dev"
+	],
+	"issuer_data": {
+		"url": "https://acme-v02.api.letsencrypt.org/acme/cert/0388b1328a8c6c46401709b2e87247972fa4"
+	}
+}

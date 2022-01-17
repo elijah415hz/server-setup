@@ -1,0 +1,8 @@
+{
+	"sans": [
+		"finances.elijahblaisdell.dev"
+	],
+	"issuer_data": {
+		"url": "https://acme-v02.api.letsencrypt.org/acme/cert/0336622e5854732b01db370ea231e9fc2a1e"
+	}
+}
