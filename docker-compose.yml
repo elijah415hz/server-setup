@@ -25,7 +25,7 @@ services:
     restart: always
 
   finances-app:
-    image: elijah415hz/finances-flask
+    image: elijah415hz/finances-flask:arm64
     restart: always
     env_file:
       - '.env'
@@ -43,7 +43,7 @@ services:
       - '.env'
 
   cron:
-    image: elijah415hz/finances-cron
+    image: elijah415hz/finances-cron:arm64
     restart: always
     volumes:
       - ../finances-flask/cron:/usr/src/cron
