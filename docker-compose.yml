@@ -54,9 +54,6 @@ services:
     image: vaultwarden/server:latest
     container_name: bitwarden
     restart: always
-    ports:
-      - 8080:80
-      - 3012:3012
     volumes:
       - ./bind-mounts/bw-data:/data
 
@@ -88,7 +85,7 @@ services:
     environment:
       - password=collaboratingInCloster080518
       - username=blarffice
-      - domain=office.elijahblaisdell.dev
-      - extra_params=--o:ssl.enable=true
-    ports:
-      - 9980:9980
+      - domain='cloud.elijahblaisdell.dev'
+      - extra_params=--o:ssl.enable=false
+    volumes:
+      - ./coolwsd.xml:/etc/coolwsd/coolwsd.xml
