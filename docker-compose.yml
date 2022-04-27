@@ -17,18 +17,18 @@ services:
 
   ddclient:
     image: ghcr.io/linuxserver/ddclient
+    restart: always
     container_name: ddclient
     env_file:
-      - '.env'
+      - 'finances.env'
     volumes:
       - ./ddclient-config:/config
-    restart: always
 
   finances-app:
     image: elijah415hz/finances-flask:arm64
     restart: always
     env_file:
-      - '.env'
+      - 'finances.env'
     volumes:
       - ../finances-flask:/usr/src/app
 
@@ -40,7 +40,7 @@ services:
       - ./bind-mounts/finances-db/db-files:/var/lib/mysql
       - ../finances-flask/db:/docker-entrypoint-initdb.d
     env_file:
-      - '.env'
+      - 'finances.env'
 
   cron:
     image: elijah415hz/finances-cron:arm64
@@ -48,7 +48,7 @@ services:
     volumes:
       - ../finances-flask/cron:/usr/src/cron
     env_file:
-      - '.env'
+      - 'finances.env'
 
   bitwarden:
     image: vaultwarden/server:latest
