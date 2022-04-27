@@ -63,3 +63,8 @@ finances.elijahblaisdell.dev {
 		output file /var/log/access.log
 	}
 }
+
+# forward traffic to jellyfin
+jelly.elijahblaisdell.dev {
+	reverse_proxy jellyfin:8096
+}
