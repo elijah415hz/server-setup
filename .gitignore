@@ -3,3 +3,4 @@ bw-data/
 build/
 ddclient-config/
 bind-mounts/
+*.env

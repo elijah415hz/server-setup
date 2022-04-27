@@ -62,30 +62,34 @@ services:
     restart: always
     volumes:
       - ./bind-mounts/nextcloud_db:/var/lib/mysql
-    environment:
-      - MYSQL_ROOT_PASSWORD=TulipHyacinth
-      - MYSQL_PASSWORD=TulipHyacinth080518
-      - MYSQL_DATABASE=nextcloud
-      - MYSQL_USER=nextcloud
+    env_file:
+      - 'nextcloud.env'
 
   nextcloud:
     image: nextcloud
     restart: always
     volumes:
       - ./bind-mounts/nextcloud:/var/www/html
-    environment:
-      - MYSQL_PASSWORD=TulipHyacinth080518
-      - MYSQL_DATABASE=nextcloud
-      - MYSQL_USER=nextcloud
-      - MYSQL_HOST=nextcloud_db
+    env_file:
+      - 'nextcloud.env'
 
   collabora:
     image: collabora/code:latest
     restart: always
-    environment:
-      - password=collaboratingInCloster080518
-      - username=blarffice
-      - domain='cloud.elijahblaisdell.dev'
-      - extra_params=--o:ssl.enable=false
+    env_file:
+      - 'nextcloud.env'
     volumes:
       - ./coolwsd.xml:/etc/coolwsd/coolwsd.xml
+
+  jellyfin:
+    image: jellyfin/jellyfin
+    restart: always
+    container_name: jellyfin
+    user: 1000:1000
+    network_mode: 'host'
+    volumes:
+      - ./bind-mounts/jellyfin/config:/config
+      - ./bind-mounts/jellyfin/cache:/cache
+      - ./bind-mounts/nextcloud/data/blarvis/files/media:/media:ro
+    env_file:
+      - 'jellyfin.env'
