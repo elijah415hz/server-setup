@@ -74,7 +74,7 @@ services:
     #   - nextcloud
     restart: always
     volumes:
-      - ./bind-mounts/nextcloud_db:/var/lib/mysql
+      - ./bind-mounts/nextcloud_db:/config
     env_file:
       - 'nextcloud.env'
 
@@ -106,12 +106,10 @@ services:
     #   - caddy
     restart: always
     container_name: jellyfin
-    user: 1000:1000
-    network_mode: 'host'
     volumes:
       - ./bind-mounts/jellyfin/config:/config
       - ./bind-mounts/jellyfin/cache:/cache
-      - ./bind-mounts/nextcloud/data/blarvis/files/media:/media:ro
+      - ./bind-mounts/nextcloud/data/blarvis/files/Media:/media
     env_file:
       - 'jellyfin.env'
 
