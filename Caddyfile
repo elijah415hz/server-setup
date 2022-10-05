@@ -68,3 +68,7 @@ finances.elijahblaisdell.dev {
 jelly.elijahblaisdell.dev {
 	reverse_proxy jellyfin:8096
 }
+
+alexaloop.elijahblaisdell.dev:443 {
+	reverse_proxy nightscout:1337
+}

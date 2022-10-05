@@ -3,6 +3,8 @@ version: '3.7'
 services:
   caddy:
     image: caddy:latest
+    # networks:
+    #   - caddy
     restart: always
     ports:
       - 80:80
@@ -26,6 +28,9 @@ services:
 
   finances-app:
     image: elijah415hz/finances-flask:arm64
+    # networks:
+    #   - caddy
+    #   - finances
     restart: always
     env_file:
       - 'finances.env'
@@ -34,6 +39,8 @@ services:
 
   finances-db:
     image: ghcr.io/linuxserver/mariadb
+    # networks:
+    #   - finances
     restart: always
     volumes:
       - ./bind-mounts/finances-db/config:/config
@@ -44,6 +51,8 @@ services:
 
   cron:
     image: elijah415hz/finances-cron:arm64
+    # networks:
+    #   - finances
     restart: always
     volumes:
       - ../finances-flask/cron:/usr/src/cron
@@ -52,6 +61,8 @@ services:
 
   bitwarden:
     image: vaultwarden/server:latest
+    # networks:
+    #   - caddy
     container_name: bitwarden
     restart: always
     volumes:
@@ -59,6 +70,8 @@ services:
 
   nextcloud_db:
     image: linuxserver/mariadb:arm64v8-latest
+    # networks:
+    #   - nextcloud
     restart: always
     volumes:
       - ./bind-mounts/nextcloud_db:/var/lib/mysql
@@ -67,6 +80,9 @@ services:
 
   nextcloud:
     image: nextcloud:23
+    # networks:
+    #   - caddy
+    #   - nextcloud
     restart: always
     volumes:
       - ./bind-mounts/nextcloud:/var/www/html
@@ -75,6 +91,9 @@ services:
 
   collabora:
     image: collabora/code:latest
+    # networks:
+    #   - caddy
+    #   - nextcloud
     restart: always
     env_file:
       - 'nextcloud.env'
@@ -83,6 +102,8 @@ services:
 
   jellyfin:
     image: jellyfin/jellyfin
+    # networks:
+    #   - caddy
     restart: always
     container_name: jellyfin
     user: 1000:1000
@@ -93,3 +114,17 @@ services:
       - ./bind-mounts/nextcloud/data/blarvis/files/media:/media:ro
     env_file:
       - 'jellyfin.env'
+
+  nightscout:
+    image: nightscout/cgm-remote-monitor
+    # networks:
+    #   - caddy
+    restart: always
+    env_file:
+      - 'nightscout.env'
+
+# networks:
+#   caddy:
+#     external: true
+#   nextcloud:
+#   finances:
