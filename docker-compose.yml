@@ -49,7 +49,7 @@ services:
     env_file:
       - 'finances.env'
 
-  cron:
+  finances-cron:
     image: elijah415hz/finances-cron:arm64
     # networks:
     #   - finances
@@ -58,6 +58,13 @@ services:
       - ../finances-flask/cron:/usr/src/cron
     env_file:
       - 'finances.env'
+
+  nextcloud-rclone-cron:
+    build: .
+    volumes:
+      - ./bind-mounts/nextcloud/data/blarvis:/usr/nextcloud-files
+      - ./rclone.conf/:/etc/rclone.conf
+      - ./rcloneSync.sh:/etc/periodic/daily/rcloneSync.sh
 
   bitwarden:
     image: vaultwarden/server:latest
