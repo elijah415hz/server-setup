@@ -63,8 +63,9 @@ services:
     image: rclone/rclone:1
     entrypoint: crond -l 2 -f
     volumes:
-      - ./bind-mounts/nextcloud/data/blarvis/files:/usr/nextcloud-files
-      - ./rclone/rclone.conf:/etc/rclone.conf
+      - ./bind-mounts/nextcloud/data/blarvis/files:/usr/nextcloud-files/files
+      - ./rclone:/config/rclone
+      - ./rclone/data:/data
       - ./rcloneSync.sh:/etc/periodic/daily/rcloneSync.sh
       - ./rclone/rclone-logs.txt:/usr/rclone-logs.txt
 
