@@ -3,5 +3,6 @@ bw-data/
 build/
 ddclient-config/
 bind-mounts/
+rclone/
 *.env
 *.conf

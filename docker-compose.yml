@@ -63,10 +63,10 @@ services:
     image: rclone/rclone:1
     entrypoint: crond -l 2 -f
     volumes:
-      - ./bind-mounts/nextcloud/data/blarvis:/usr/nextcloud-files
-      - ./rclone.conf/:/etc/rclone.conf
-      - ./rcloneSync.sh:/etc/periodic/15min/rcloneSync.sh
-      - ./rclone-logs:/usr/rclone-logs
+      - ./bind-mounts/nextcloud/data/blarvis/files:/usr/nextcloud-files
+      - ./rclone/rclone.conf:/etc/rclone.conf
+      - ./rcloneSync.sh:/etc/periodic/daily/rcloneSync.sh
+      - ./rclone/rclone-logs.txt:/usr/rclone-logs.txt
 
   bitwarden:
     image: vaultwarden/server:latest
