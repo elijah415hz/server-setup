@@ -60,11 +60,13 @@ services:
       - 'finances.env'
 
   nextcloud-rclone-cron:
-    build: .
+    image: rclone/rclone:1
+    entrypoint: crond -l 2 -f
     volumes:
       - ./bind-mounts/nextcloud/data/blarvis:/usr/nextcloud-files
       - ./rclone.conf/:/etc/rclone.conf
-      - ./rcloneSync.sh:/etc/periodic/daily/rcloneSync.sh
+      - ./rcloneSync.sh:/etc/periodic/15min/rcloneSync.sh
+      - ./rclone-logs:/usr/rclone-logs
 
   bitwarden:
     image: vaultwarden/server:latest
