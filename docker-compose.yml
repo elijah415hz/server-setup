@@ -108,7 +108,7 @@ services:
     env_file:
       - 'nextcloud.env'
     volumes:
-      - ./coolwsd.xml:/etc/coolwsd/coolwsd.xml
+      - ./collabora-config/coolwsd.xml:/etc/coolwsd/coolwsd.xml
 
   jellyfin:
     image: jellyfin/jellyfin
