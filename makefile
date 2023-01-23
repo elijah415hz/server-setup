@@ -1,5 +1,23 @@
+init:
+	@echo "Initializing finances app"
+	make -C finances-flask init
+	@echo "Initializing portfolio"
+	make -C portfolio init
+
 files-scan:
 	docker exec -ti --user www-data server-setup-nextcloud-1 /var/www/html/occ files:scan --all
 
-update_images:
+update-images:
 	docker-compose pull && docker-compose up -d
+
+deploy-finances:
+	@echo "Updating..."
+	make -C finances-flask update
+	@echo "Deploying..."
+	docker-compose up -d --force-recreate finances-app
+
+deploy-portfolio:
+	@echo "Updating..."
+	make -C portfolio update
+	@echo "Deploying..."
+	docker-compose up -d --force-recreate caddy
