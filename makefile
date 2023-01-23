@@ -12,7 +12,7 @@ update-images:
 
 deploy-finances:
 	@echo "Updating..."
-	git submodule update --remote finances-flask
+	git submodule update finances-flask
 	@echo "Building..."
 	npm run --prefix finances-flask build
 	@echo "Deploying..."
@@ -20,7 +20,7 @@ deploy-finances:
 
 deploy-portfolio:
 	@echo "Updating..."
-	git submodule update --remote portfolio
+	git submodule update portfolio
 	@echo "Building..."
 	npm run --prefix portfolio build
 	@echo "Deploying..."
