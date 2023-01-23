@@ -12,12 +12,16 @@ update-images:
 
 deploy-finances:
 	@echo "Updating..."
-	make -C finances-flask update
+	git submodule update --remote finances-flask
+	@echo "Building..."
+	npm run --prefix finances-flask build
 	@echo "Deploying..."
 	docker-compose up -d --force-recreate finances-app
 
 deploy-portfolio:
 	@echo "Updating..."
-	make -C portfolio update
+	git submodule update --remote portfolio
+	@echo "Building..."
+	npm run --prefix portfolio build
 	@echo "Deploying..."
 	docker-compose up -d --force-recreate caddy
