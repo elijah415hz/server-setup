@@ -1,0 +1,6 @@
+[submodule "finances-flask"]
+	path = finances-flask
+	url = git@github.com:elijah415hz/finances-flask.git
+[submodule "portfolio"]
+	path = portfolio
+	url = git@github.com:elijah415hz/portfolio.git
