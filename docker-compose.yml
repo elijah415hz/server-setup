@@ -59,11 +59,11 @@ services:
     env_file:
       - 'finances.env'
 
-  nextcloud-rclone-cron:
+  rclone-cron:
     image: rclone/rclone:1
     entrypoint: crond -l 2 -f
     volumes:
-      - ./bind-mounts/nextcloud/data/blarvis/files:/usr/nextcloud-files/files
+      - ./:/usr/ServerBackup
       - ./rclone:/config/rclone
       - ./rclone/data:/data
       - ./rcloneSync.sh:/etc/periodic/daily/rcloneSync.sh

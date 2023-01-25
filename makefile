@@ -25,3 +25,13 @@ deploy-portfolio:
 	npm run --prefix portfolio build
 	@echo "Deploying..."
 	docker-compose up -d --force-recreate caddy
+
+restore:
+	@echo "Restoring files from OneDrive..."
+	docker run --rm \
+	--volume $(PWD):/usr/ServerBackup
+	--volume $(PWD)/rclone:/config/rclone \
+	rclone/rclone:1 \
+	sync OneBlarvis:ServerBackup /usr/ServerBackup \
+	--config="/config/rclone/rclone.conf" \
+	--progress
