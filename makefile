@@ -10,6 +10,11 @@ files-scan:
 update-images:
 	docker-compose pull && docker-compose up -d
 
+deploy:
+	@echo "Deploying..."
+	git pull --recurse-submodules
+	docker-compose up -d --force-recreate --remove-orphans
+
 deploy-finances:
 	@echo "Updating..."
 	git submodule update finances-flask
