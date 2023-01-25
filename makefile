@@ -38,7 +38,7 @@ restore:
 	--volume $(PWD):/usr/ServerBackup
 	--volume $(PWD)/rclone:/config/rclone \
 	rclone/rclone:1 \
-	sync OneBlarvis:ServerBackup /usr/ServerBackup \
+	copy OneBlarvis:ServerBackup /usr/ServerBackup \
 	--config="/config/rclone/rclone.conf" \
 	--progress
 
