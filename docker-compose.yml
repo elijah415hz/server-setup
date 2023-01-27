@@ -44,8 +44,7 @@ services:
     restart: always
     volumes:
       - ./bind-mounts/finances-db/config:/config
-      - ./bind-mounts/finances-db/db-files:/var/lib/mysql
-      - ./finances-flask/db:/docker-entrypoint-initdb.d
+      - ./finances-flask/db:/config/initdb.d
     env_file:
       - 'finances.env'
 
