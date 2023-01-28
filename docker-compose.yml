@@ -58,35 +58,6 @@ services:
     env_file:
       - 'finances.env'
 
-  rclone-cron:
-    image: rclone/rclone:1
-    entrypoint: crond -l 2 -f
-    volumes:
-      - ./:/usr/ServerBackup
-      - ./rclone:/config/rclone
-      - ./rclone/data:/data
-      - ./rcloneSync.sh:/etc/periodic/daily/rcloneSync.sh
-      - ./rclone/rclone-logs.txt:/usr/rclone-logs.txt
-
-  bitwarden:
-    image: vaultwarden/server:latest
-    # networks:
-    #   - caddy
-    container_name: bitwarden
-    restart: always
-    volumes:
-      - ./bind-mounts/bw-data:/data
-
-  nextcloud_db:
-    image: linuxserver/mariadb:arm64v8-latest
-    # networks:
-    #   - nextcloud
-    restart: always
-    volumes:
-      - ./bind-mounts/nextcloud_db:/config
-    env_file:
-      - 'nextcloud.env'
-
   nextcloud:
     image: nextcloud:23
     # networks:
@@ -98,9 +69,21 @@ services:
     env_file:
       - 'nextcloud.env'
 
+  nextcloud_db:
+    image: linuxserver/mariadb:arm64v8-latest
+    # networks:
+    #   - nextcloud
+    restart: always
+    volumes:
+      - ./bind-mounts/nextcloud_db:/config
+    env_file:
+      - 'nextcloud.env'
+
   nextcloud-cron:
     image: nextcloud:23
     restart: always
+    # networks:
+    #   - nextcloud
     volumes:
       - ./bind-mounts/nextcloud:/var/www/html
     entrypoint: /cron.sh
@@ -117,7 +100,7 @@ services:
       - ./collabora-config/coolwsd.xml:/etc/coolwsd/coolwsd.xml
 
   jellyfin:
-    image: jellyfin/jellyfin
+    image: jellyfin/jellyfin:latest
     # networks:
     #   - caddy
     restart: always
@@ -130,12 +113,31 @@ services:
       - 'jellyfin.env'
 
   nightscout:
-    image: nightscout/cgm-remote-monitor
+    image: nightscout/cgm-remote-monitor:latest
     # networks:
     #   - caddy
     restart: always
     env_file:
       - 'nightscout.env'
+
+  rclone-cron:
+    image: rclone/rclone:1
+    entrypoint: crond -l 2 -f
+    volumes:
+      - ./:/usr/ServerBackup
+      - ./rclone:/config/rclone
+      - ./rclone/data:/data
+      - ./rcloneSync.sh:/etc/periodic/daily/rcloneSync.sh
+      - ./rclone/rclone-logs.txt:/usr/rclone-logs.txt
+
+  # bitwarden:
+  #   image: vaultwarden/server:latest
+  #   # networks:
+  #   #   - caddy
+  #   container_name: bitwarden
+  #   restart: always
+  #   volumes:
+  #     - ./bind-mounts/bw-data:/data
 
 # networks:
 #   caddy:
