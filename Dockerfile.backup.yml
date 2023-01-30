@@ -1,0 +1,5 @@
+FROM rclone/rclone:1
+
+RUN apt-get update && apt-get -y install default-mysql-client
+
+ENTRYPOINT [ "crond -l 2 -f" ]

@@ -76,6 +76,7 @@ services:
     restart: always
     volumes:
       - ./bind-mounts/nextcloud_db:/config
+      - ./bind-mounts/nextcloud-db-backup:/config/initdb.d
     env_file:
       - 'nextcloud.env'
 
@@ -120,15 +121,16 @@ services:
     env_file:
       - 'nightscout.env'
 
-  rclone-cron:
-    image: rclone/rclone:1
-    entrypoint: crond -l 2 -f
+  cloud-backup-cron:
+    build: .
     volumes:
       - ./:/usr/ServerBackup
       - ./rclone:/config/rclone
       - ./rclone/data:/data
-      - ./rcloneSync.sh:/etc/periodic/daily/rcloneSync.sh
-      - ./rclone/rclone-logs.txt:/usr/rclone-logs.txt
+      - ./backup.sh:/etc/periodic/daily/backup.sh
+    env_file:
+      - 'nextcloud.env'
+      - 'cloud-backup-cron.env'
 
   # bitwarden:
   #   image: vaultwarden/server:latest
