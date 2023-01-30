@@ -123,6 +123,7 @@ services:
 
   cloud-backup-cron:
     build: .
+    entrypoint: crond -l 2 -f
     volumes:
       - ./:/usr/ServerBackup
       - ./rclone:/config/rclone
