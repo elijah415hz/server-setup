@@ -4,7 +4,8 @@ sendMail () {
     sub=$1
     fileName=$2
 
-    if [ -z "$fileName"] then
+    if [ -z "$fileName"]
+    then
         fileName="/tmp/hooray"
         echo "Hooray" > /tmp/hooray
     fi
