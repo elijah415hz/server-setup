@@ -59,7 +59,7 @@ services:
       - 'finances.env'
 
   nextcloud:
-    image: nextcloud:23
+    image: nextcloud:25
     # networks:
     #   - caddy
     #   - nextcloud
@@ -81,7 +81,7 @@ services:
       - 'nextcloud.env'
 
   nextcloud-cron:
-    image: nextcloud:23
+    image: nextcloud:25
     restart: always
     # networks:
     #   - nextcloud
