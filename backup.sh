@@ -24,7 +24,7 @@ else
     sendMail "MysqlDump succeeded" "Hooray!"
 fi
 
-rclone --config="/config/rclone/rclone.conf" sync ./ServerBackup OneBlarvis:ServerBackup  --include /*.env &> /tmp/rclone-env-logs.txt
+rclone --config="/config/rclone/rclone.conf" copy ./ServerBackup OneBlarvis:ServerBackup  --include /*.env &> /tmp/rclone-env-logs.txt
 if [ $? -ne 0 ]; then
     echo "script 2 returned non-zero code"
     sendMail "Rclone sync of env variables failed" rclone-env-logs.txt
