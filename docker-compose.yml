@@ -100,6 +100,15 @@ services:
     volumes:
       - ./collabora-config/coolwsd.xml:/etc/coolwsd/coolwsd.xml
 
+  onlyoffice:
+    image: onlyoffice/documentserver:latest
+    restart: always
+    environment:
+      - JWT_ENABLED=false
+    volumes:
+      - document_data:/var/www/onlyoffice/Data
+      - document_log:/var/log/onlyoffice
+
   jellyfin:
     image: jellyfin/jellyfin:latest
     # networks:
