@@ -103,11 +103,11 @@ services:
   onlyoffice:
     image: onlyoffice/documentserver:latest
     restart: always
-    environment:
-      - JWT_ENABLED=false
+    env_file:
+      - 'onlyoffice.env'
     volumes:
-      - document_data:/var/www/onlyoffice/Data
-      - document_log:/var/log/onlyoffice
+      - ./bind-mounts/onlyoffice/document_data:/var/www/onlyoffice/Data
+      - ./bind-mounts/onlyoffice/document_log:/var/log/onlyoffice
 
   jellyfin:
     image: jellyfin/jellyfin:latest
