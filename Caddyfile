@@ -24,14 +24,14 @@ elijahblaisdell.dev {
 }
 
 # Forward traffic to Bitwarden
-passwords.elijahblaisdell.dev:443 {
-	reverse_proxy /notifications/hub bitwarden:3012
-	reverse_proxy bitwarden:80 {
-		# Send the true remote IP to Rocket, so that bitwarden_rs can put this in the
-		# log, so that fail2ban can ban the correct IP.
-		header_up X-Real-IP {remote_host}
-	}
-}
+# passwords.elijahblaisdell.dev:443 {
+# 	reverse_proxy /notifications/hub bitwarden:3012
+# 	reverse_proxy bitwarden:80 {
+# 		# Send the true remote IP to Rocket, so that bitwarden_rs can put this in the
+# 		# log, so that fail2ban can ban the correct IP.
+# 		header_up X-Real-IP {remote_host}
+# 	}
+# }
 
 # Forward Traffic to Nextcloud
 cloud.elijahblaisdell.dev:443 {
@@ -39,9 +39,15 @@ cloud.elijahblaisdell.dev:443 {
 }
 
 # Forward Traffic to Collabora
-office.elijahblaisdell.dev {
+collabora.elijahblaisdell.dev {
 	encode gzip
 	reverse_proxy collabora:9980
+}
+
+# Forward Traffic to OnlyOffice
+onlyoffice.elijahblaisdell.dev {
+	encode gzip
+	reverse_proxy onlyoffice:80
 }
 
 # Forward traffic to finances app
