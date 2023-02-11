@@ -6,6 +6,7 @@ services:
     # networks:
     #   - caddy
     restart: always
+    container_name: caddy
     ports:
       - 80:80
       - 443:443
@@ -32,6 +33,7 @@ services:
     #   - caddy
     #   - finances
     restart: always
+    container_name: finances-app
     env_file:
       - 'finances.env'
     volumes:
@@ -42,6 +44,7 @@ services:
     # networks:
     #   - finances
     restart: always
+    container_name: finances-db
     volumes:
       - ./bind-mounts/finances-db/config:/config
       - ./finances-flask/db:/config/initdb.d
@@ -53,6 +56,7 @@ services:
     # networks:
     #   - finances
     restart: always
+    container_name: finances-cron
     volumes:
       - ./finances-flask/cron:/usr/src/cron
     env_file:
@@ -64,6 +68,7 @@ services:
     #   - caddy
     #   - nextcloud
     restart: always
+    container_name: nextcloud
     volumes:
       - ./bind-mounts/nextcloud:/var/www/html
     env_file:
@@ -74,6 +79,7 @@ services:
     # networks:
     #   - nextcloud
     restart: always
+    container_name: nextcloud-db
     volumes:
       - ./bind-mounts/nextcloud_db:/config
       - ./bind-mounts/nextcloud-db-backup:/config/initdb.d
@@ -83,6 +89,7 @@ services:
   nextcloud-cron:
     image: nextcloud:25
     restart: always
+    container_name: nextcloud-cron
     # networks:
     #   - nextcloud
     volumes:
@@ -95,6 +102,7 @@ services:
     #   - caddy
     #   - nextcloud
     restart: always
+    container_name: collabora
     env_file:
       - 'nextcloud.env'
     volumes:
@@ -103,6 +111,7 @@ services:
   onlyoffice:
     image: onlyoffice/documentserver:latest
     restart: always
+    container_name: onlyoffice
     env_file:
       - 'onlyoffice.env'
     volumes:
@@ -127,11 +136,14 @@ services:
     # networks:
     #   - caddy
     restart: always
+    container_name: nightscout
     env_file:
       - 'nightscout.env'
 
   cloud-backup-cron:
     build: .
+    restart: always
+    container_name: cloud-backup-cron
     entrypoint: crond -l 2 -f
     volumes:
       - ./:/usr/ServerBackup
