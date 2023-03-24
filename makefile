@@ -16,20 +16,10 @@ deploy:
 	docker-compose up -d --remove-orphans
 
 deploy-finances:
-	@echo "Updating..."
-	git pull
-	git submodule update finances-flask
-	@echo "Building..."
-	npm run --prefix finances-flask build
+	@echo "Pulling image..."
+	docker-compose pull finances-app
 	@echo "Deploying..."
-	docker-compose up -d --force-recreate finances-app
-
-deploy-finances-be-only:
-	@echo "Updating..."
-	git pull
-	git submodule update finances-flask
-	@echo "Deploying..."
-	docker-compose up -d --force-recreate finances-app
+	docker-compose up -d finances-app
 
 deploy-portfolio:
 	@echo "Updating..."

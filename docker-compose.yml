@@ -36,8 +36,6 @@ services:
     container_name: finances-app
     env_file:
       - 'finances.env'
-    volumes:
-      - ./finances-flask:/usr/src/app
 
   finances-db:
     image: ghcr.io/linuxserver/mariadb
