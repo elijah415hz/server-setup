@@ -28,7 +28,7 @@ services:
       - ./ddclient-config:/config
 
   finances-app:
-    image: elijah415hz/finances-flask:arm64
+    image: elijah415hz/finances-flask:github-build
     # networks:
     #   - caddy
     #   - finances
