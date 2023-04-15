@@ -4,6 +4,7 @@ init:
 	@echo "Initializing portfolio"
 	make -C portfolio init
 	@echo "Creating devops pipe"
+	init-pipe
 
 init-pipe:
 	mkfifo /home/pi/server-setup/bind-mounts/devops/pipe
