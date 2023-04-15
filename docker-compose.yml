@@ -153,7 +153,7 @@ services:
       - 'cloud-backup-cron.env'
 
   devops:
-    image: elijah415hz/server-devops
+    image: elijah415hz/server-devops:github-build
     volumes:
       - ./bind-mounts/devops/pipe:/webserver/pipe
     env_file:
