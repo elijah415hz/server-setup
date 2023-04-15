@@ -154,6 +154,7 @@ services:
 
   devops:
     image: elijah415hz/server-devops:github-build
+    container_name: devops
     volumes:
       - ./bind-mounts/devops/pipe:/webserver/pipe
     env_file:
