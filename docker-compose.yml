@@ -152,6 +152,13 @@ services:
       - 'nextcloud.env'
       - 'cloud-backup-cron.env'
 
+  devops:
+    image: elijah415hz/server-devops
+    volumes:
+      - ./bind-mounts/devops/pipe:/webserver/pipe
+    env_file:
+      - 'devops.env'
+
   # bitwarden:
   #   image: vaultwarden/server:latest
   #   # networks:

@@ -78,3 +78,7 @@ jelly.elijahblaisdell.dev {
 alexaloop.elijahblaisdell.dev:443 {
 	reverse_proxy nightscout:1337
 }
+
+devops.elijahblaisdell.dev {
+	reverse_proxy devops:8080
+}

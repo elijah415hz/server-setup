@@ -3,7 +3,12 @@ init:
 	make -C finances-flask init
 	@echo "Initializing portfolio"
 	make -C portfolio init
+	@echo "Creating devops pipe"
 
+init-pipe:
+	mkfifo /home/pi/server-setup/bind-mounts/devops/pipe
+	(crontab -l ; echo "@reboot /home/pi/server-setup/devops-listen-to-pipe.sh") | sort - | uniq - | crontab -
+	
 files-scan:
 	docker exec -ti --user www-data server-setup-nextcloud-1 /var/www/html/occ files:scan --all
 
