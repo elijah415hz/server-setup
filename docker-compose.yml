@@ -138,6 +138,10 @@ services:
     env_file:
       - 'nightscout.env'
 
+  stirling-pdf:
+    image: frooodle/s-pdf
+    container_name: froodle
+
   cloud-backup-cron:
     build: .
     restart: always

@@ -79,6 +79,10 @@ alexaloop.elijahblaisdell.dev:443 {
 	reverse_proxy nightscout:1337
 }
 
+pdf.elijahblaisdell.dev {
+	reverse_proxy froodle:8080
+}
+
 devops.elijahblaisdell.dev {
 	reverse_proxy devops:8080
 }
