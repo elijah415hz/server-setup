@@ -80,7 +80,8 @@ alexaloop.elijahblaisdell.dev:443 {
 }
 
 pdf.elijahblaisdell.dev {
-	reverse_proxy froodle:8080
+	encode gzip
+	reverse_proxy stirling-pdf:8080
 }
 
 devops.elijahblaisdell.dev {

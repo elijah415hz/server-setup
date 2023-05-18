@@ -140,7 +140,7 @@ services:
 
   stirling-pdf:
     image: frooodle/s-pdf
-    container_name: froodle
+    container_name: stirling-pdf
 
   cloud-backup-cron:
     build: .
