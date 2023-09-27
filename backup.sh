@@ -22,27 +22,24 @@ sendMail () {
 
 mkdir -p nextcloud-db-backup
 
+curl https://hc-ping.com/3c40f149-93ee-4803-94fa-5657d876d734
+
 mysqldump --single-transaction -h $MYSQL_HOST -u $MYSQL_USER -p$MYSQL_PASSWORD $MYSQL_DATABASE &> /tmp/sqlDumpOrErr.sql
 if [ $? -ne 0 ]
 then
     sendMail "MysqlDump failed" /tmp/sqlDumpOrErr.sql
 else
     mv /tmp/sqlDumpOrErr.sql /usr/ServerBackup/bind-mounts/nextcloud-db-backup/nextcloud-mysql-dump-backup.sql
-    sendMail "MysqlDump succeeded"
 fi
 
 rclone --config="/config/rclone/rclone.conf" copy /usr/ServerBackup OneBlarvis:ServerBackup  --include /*.env &> /tmp/rclone-env-logs.txt
 if [ $? -ne 0 ]
 then
     sendMail "Rclone sync of env variables failed" /tmp/rclone-env-logs.txt
-else
-    sendMail "Rclone sync of env variables succeeded"
 fi
 
 rclone --config="/config/rclone/rclone.conf" sync /usr/ServerBackup/bind-mounts OneBlarvis:ServerBackup/bind-mounts  --exclude /caddy/** --exclude /nextcloud_db/** &> /tmp/rclone-bind-mounts-logs.txt
 if [ $? -ne 0 ]
 then
     sendMail "Rclone sync of bind-mounts failed" /tmp/rclone-bind-mounts-logs.txt
-else
-    sendMail "Rclone sync of bind-mounts succeeded"
 fi
