@@ -165,14 +165,14 @@ services:
     env_file:
       - 'devops.env'
 
-  # bitwarden:
-  #   image: vaultwarden/server:latest
-  #   # networks:
-  #   #   - caddy
-  #   container_name: bitwarden
-  #   restart: always
-  #   volumes:
-  #     - ./bind-mounts/bw-data:/data
+  bitwarden:
+    image: vaultwarden/server:latest
+    # networks:
+    #   - caddy
+    container_name: bitwarden
+    restart: always
+    volumes:
+      - ./bind-mounts/bw-data:/data
 
 # networks:
 #   caddy:
