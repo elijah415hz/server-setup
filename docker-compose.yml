@@ -173,9 +173,10 @@ services:
     restart: always
     volumes:
       - ./bind-mounts/bw-data:/data
-      
+
   gogrow:
     image: elijah415hz/gogrow:latest
+    container_name: gogrow
     volumes:
       - ./bind-mounts/img:/app/gogrow_app/img
       - ./bind-mounts/backups:/app/gogrow_app/backups
