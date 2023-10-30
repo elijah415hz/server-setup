@@ -173,7 +173,12 @@ services:
     restart: always
     volumes:
       - ./bind-mounts/bw-data:/data
-
+      
+  gogrow:
+    image: elijah415hz/gogrow:latest
+    volumes:
+      - ./bind-mounts/img:/app/gogrow_app/img
+      - ./bind-mounts/backups:/app/gogrow_app/backups
 # networks:
 #   caddy:
 #     external: true
