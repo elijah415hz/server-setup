@@ -1,0 +1,13 @@
+# Copy this file into ddclient.conf and add the apikey and secretapikey from porkbun
+
+use=web
+
+ssl=yes
+
+protocol=porkbun
+
+apikey=<apikey>
+
+secretapikey=<secretapikey>
+passwords.elijahblaisdell.dev,cloud.elijahblaisdell.dev,finances.elijahblaisdell.dev,collabora.elijahblaisdell.dev,jelly.elijahblaisdell.dev,alexaloop.elijahblaisdell.dev,onlyoffice.elijahblaisdell.dev,devops.elijahblaisdell.dev,pdf.elijahblaisdell.dev,grow.elijahblaisdell.dev
+on-root-domain=yes elijahblaisdell.dev

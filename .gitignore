@@ -1,8 +1,8 @@
 bitwarden_keys
 bw-data/
 build/
-ddclient-config/
+ddclient-config/!(*.conf.example)
 bind-mounts/
 rclone/
 *.env
-*.conf
+**.conf
