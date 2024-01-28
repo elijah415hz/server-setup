@@ -1,6 +1,6 @@
 # Copy this file into ddclient.conf and add the apikey and secretapikey from porkbun
 
-use=web
+use=web, web=checkip.dyndns.org/
 
 ssl=yes
 
