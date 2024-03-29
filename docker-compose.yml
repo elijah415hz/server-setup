@@ -180,6 +180,39 @@ services:
     volumes:
       - ./bind-mounts/img:/app/gogrow_app/img
       - ./bind-mounts/backups:/app/gogrow_app/backups
+
+  paperless-broker:
+    image: docker.io/library/redis:7
+    restart: unless-stopped
+    volumes:
+      - redisdata:/data
+
+  paperless-db:
+    image: docker.io/library/postgres:15
+    restart: unless-stopped
+    volumes:
+      - ./bind-mounts/paperless/dbdata:/var/lib/postgresql/data
+    env_file: paperless.env
+    environment:
+      POSTGRES_DB: paperless
+      POSTGRES_USER: paperless
+      POSTGRES_PASSWORD: paperless
+
+  paperless-webserver:
+    image: ghcr.io/paperless-ngx/paperless-ngx:latest
+    restart: unless-stopped
+    depends_on:
+      - paperless-db
+      - paperless-broker
+    volumes:
+      - ./bind-mounts/paperless/data:/usr/src/paperless/data
+      - ./bind-mounts/paperless/media:/usr/src/paperless/media
+      - ./bind-mounts/paperless/export:/usr/src/paperless/export
+      - ./bind-mounts/nextcloud/data/blarvis/files/Document-Drop:/usr/src/paperless/consume
+    env_file: paperless.env
+    environment:
+      PAPERLESS_REDIS: redis://paperless-broker:6379
+      PAPERLESS_DBHOST: paperless-db
 # networks:
 #   caddy:
 #     external: true

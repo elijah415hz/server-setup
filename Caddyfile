@@ -91,3 +91,7 @@ devops.elijahblaisdell.dev {
 grow.elijahblaisdell.dev {
 	reverse_proxy gogrow:5555
 }
+
+paperless.elijahblaisdell.dev {
+	reverse_proxy paperless-webserver:
+}
