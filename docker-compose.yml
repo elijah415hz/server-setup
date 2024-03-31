@@ -183,16 +183,17 @@ services:
 
   paperless-broker:
     image: docker.io/library/redis:7
+    container_name: paperless-broker
     restart: unless-stopped
     volumes:
-      - redisdata:/data
+      - ./bind-mounts/paperless/redisdata:/data
 
   paperless-db:
     image: docker.io/library/postgres:15
+    container_name: paperless-db
     restart: unless-stopped
     volumes:
       - ./bind-mounts/paperless/dbdata:/var/lib/postgresql/data
-    env_file: paperless.env
     environment:
       POSTGRES_DB: paperless
       POSTGRES_USER: paperless
@@ -200,6 +201,7 @@ services:
 
   paperless-webserver:
     image: ghcr.io/paperless-ngx/paperless-ngx:latest
+    container_name: paperless-webserver
     restart: unless-stopped
     depends_on:
       - paperless-db
@@ -213,6 +215,8 @@ services:
     environment:
       PAPERLESS_REDIS: redis://paperless-broker:6379
       PAPERLESS_DBHOST: paperless-db
+      USERMAP_UID: 33
+      USERMAP_GID: 33
 # networks:
 #   caddy:
 #     external: true

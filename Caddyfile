@@ -93,5 +93,5 @@ grow.elijahblaisdell.dev {
 }
 
 paperless.elijahblaisdell.dev {
-	reverse_proxy paperless-webserver:
+	reverse_proxy paperless-webserver:8000
 }

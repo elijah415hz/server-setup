@@ -9,5 +9,5 @@ protocol=porkbun
 apikey=<apikey>
 
 secretapikey=<secretapikey>
-passwords.elijahblaisdell.dev,cloud.elijahblaisdell.dev,finances.elijahblaisdell.dev,collabora.elijahblaisdell.dev,jelly.elijahblaisdell.dev,alexaloop.elijahblaisdell.dev,onlyoffice.elijahblaisdell.dev,devops.elijahblaisdell.dev,pdf.elijahblaisdell.dev,grow.elijahblaisdell.dev
+passwords.elijahblaisdell.dev,cloud.elijahblaisdell.dev,finances.elijahblaisdell.dev,collabora.elijahblaisdell.dev,jelly.elijahblaisdell.dev,alexaloop.elijahblaisdell.dev,onlyoffice.elijahblaisdell.dev,devops.elijahblaisdell.dev,pdf.elijahblaisdell.dev,grow.elijahblaisdell.dev,paperless.elijahblaisdell.dev
 on-root-domain=yes elijahblaisdell.dev
