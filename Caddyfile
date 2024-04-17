@@ -88,10 +88,6 @@ devops.elijahblaisdell.dev {
 	reverse_proxy devops:8080
 }
 
-grow.elijahblaisdell.dev {
-	reverse_proxy gogrow:5555
-}
-
 paperless.elijahblaisdell.dev {
 	reverse_proxy paperless-webserver:8000
 }
