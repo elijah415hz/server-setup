@@ -200,6 +200,7 @@ services:
     volumes:
       - ./bind-mounts/paperless/data:/usr/src/paperless/data
       - ./bind-mounts/paperless/media:/usr/src/paperless/media
+      - ./bind-mounts/nextcloud/data/blarvis/files/paperless-documents:/usr/src/paperless/media/documents/archive
       - ./bind-mounts/paperless/export:/usr/src/paperless/export
       - ./bind-mounts/nextcloud/data/blarvis/files/Document-Drop:/usr/src/paperless/consume
     env_file: paperless.env
