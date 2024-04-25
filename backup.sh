@@ -32,6 +32,14 @@ else
     mv /tmp/sqlDumpOrErr.sql /usr/ServerBackup/bind-mounts/nextcloud-db-backup/nextcloud-mysql-dump-backup.sql
 fi
 
+pg_dumpall -U paperless -h paperless-db  -d paperless -f /tmp/paperlessSqlDumpOrErr.sql
+if [ $? -ne 0 ]
+then
+    sendMail "Paperless pg-dump failed failed" /tmp/paperlessSqlDumpOrErr.sql
+else
+    mv /tmp/paperlessSqlDumpOrErr.sql /usr/ServerBackup/bind-mounts/paperless-db-backup/paperless-pg-dump-backup.sql
+fi
+
 rclone --config="/config/rclone/rclone.conf" copy /usr/ServerBackup OneBlarvis:ServerBackup  --include /*.env &> /tmp/rclone-env-logs.txt
 if [ $? -ne 0 ]
 then
