@@ -32,7 +32,7 @@ else
     mv /tmp/sqlDumpOrErr.sql /usr/ServerBackup/bind-mounts/nextcloud-db-backup/nextcloud-mysql-dump-backup.sql
 fi
 
-pg_dumpall -U paperless -h paperless-db  -d paperless -f /tmp/paperlessSqlDumpOrErr.sql
+pg_dumpall -U paperless -h paperless-db  -d paperless -f /tmp/paperlessSqlDumpOrErr.sql 2> /tmp/paperlessSqlDumpOrErr.sql
 if [ $? -ne 0 ]
 then
     sendMail "Paperless pg-dump failed failed" /tmp/paperlessSqlDumpOrErr.sql
