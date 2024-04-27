@@ -147,12 +147,14 @@ services:
     entrypoint: crond -l 2 -f
     volumes:
       - ./:/usr/ServerBackup
+      - ./.pgpass:/root/.pgpass
       - ./rclone:/config/rclone
       - ./rclone/data:/data
       - ./backup.sh:/etc/periodic/daily/backup.sh
     env_file:
       - 'nextcloud.env'
       - 'cloud-backup-cron.env'
+      - 'paperless.env'
 
   devops:
     image: elijah415hz/server-devops:github-build

@@ -4,5 +4,6 @@ build/
 ddclient-config/!(*.conf.example)
 bind-mounts/
 rclone/
+.pgpass
 *.env
 **.conf
