@@ -35,7 +35,7 @@ fi
 pg_dumpall -U $POSTGRES_USER -h paperless-db -w &> /tmp/paperlessSqlDumpOrErr.sql
 if [ $? -ne 0 ]
 then
-    sendMail "Paperless pg-dump failed failed" /tmp/paperlessSqlDumpOrErr.sql
+    sendMail "Paperless pg-dump failed" /tmp/paperlessSqlDumpOrErr.sql
 else
     mv /tmp/paperlessSqlDumpOrErr.sql /usr/ServerBackup/bind-mounts/paperless-db-backup/paperless-pg-dump-backup.sql
 fi
