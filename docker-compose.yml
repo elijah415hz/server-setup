@@ -115,7 +115,7 @@ services:
       - ./bind-mounts/onlyoffice/document_log:/var/log/onlyoffice
 
   jellyfin:
-    image: jellyfin/jellyfin:latest
+    image: jellyfin/jellyfin:10.9.9
     # networks:
     #   - caddy
     restart: always
