@@ -14,18 +14,18 @@ files-scan:
 	docker exec -ti --user www-data server-setup-nextcloud-1 /var/www/html/occ files:scan --all
 
 update-images:
-	docker-compose pull && docker-compose up -d
+	docker compose pull && docker compose up -d
 
 deploy:
 	@echo "Deploying..."
 	git pull --recurse-submodules
-	docker-compose up -d --remove-orphans
+	docker compose up -d --remove-orphans
 
 deploy-finances:
 	@echo "Pulling image..."
-	docker-compose pull finances-app
+	docker compose pull finances-app
 	@echo "Deploying..."
-	docker-compose up -d finances-app
+	docker compose up -d finances-app
 
 deploy-portfolio:
 	@echo "Updating..."
@@ -34,7 +34,7 @@ deploy-portfolio:
 	@echo "Building..."
 	npm run --prefix portfolio build
 	@echo "Deploying..."
-	docker-compose up -d --force-recreate caddy
+	docker compose up -d --force-recreate caddy
 
 restore:
 	@echo "Restoring files from OneDrive..."
