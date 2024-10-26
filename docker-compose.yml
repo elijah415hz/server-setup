@@ -136,6 +136,14 @@ services:
     env_file:
       - 'nightscout.env'
 
+  nightscout-db:
+    image: mongo
+    restart: always
+    volumes:
+      - ./bind-mounts/nightscout-db:/data/db
+    env_file:
+      - 'nightscout.env'
+
   stirling-pdf:
     image: frooodle/s-pdf
     container_name: stirling-pdf
