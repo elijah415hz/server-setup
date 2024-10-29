@@ -140,7 +140,7 @@ services:
     image: mongo
     restart: always
     volumes:
-      - ./bind-mounts/nightscout-db:/data/db
+      - nightscout-db:/data/db
     env_file:
       - 'nightscout.env'
 
@@ -219,6 +219,8 @@ services:
       PAPERLESS_DBHOST: paperless-db
       USERMAP_UID: 33
       USERMAP_GID: 33
+volumes:
+  nightscout-db:
 # networks:
 #   caddy:
 #     external: true

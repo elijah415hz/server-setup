@@ -40,6 +40,13 @@ else
     mv /tmp/paperlessSqlDumpOrErr.sql /usr/ServerBackup/bind-mounts/paperless-db-backup/paperless-pg-dump-backup.sql
 fi
 
+mongodump --uri $MONGODB_URI &> /tmp/nighscoutMongoDbDumpLog.txt
+if [ $? -ne 0 ]
+then
+    sendMail  "Nightscout mongodump failed" /tmp/nighscoutMongoDbDumpLog.txt
+else
+    mv ./dump/nightscoutDB /usr/ServerBackup/bind-mounts/nightscout-db-backup
+
 rclone --config="/config/rclone/rclone.conf" copy /usr/ServerBackup OneBlarvis:ServerBackup  --include /*.env &> /tmp/rclone-env-logs.txt
 if [ $? -ne 0 ]
 then
