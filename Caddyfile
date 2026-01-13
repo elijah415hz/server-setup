@@ -91,3 +91,16 @@ devops.elijahblaisdell.dev {
 paperless.elijahblaisdell.dev {
 	reverse_proxy paperless-webserver:8000
 }
+
+# Serve singing website at main domain
+elijahblaisdell.com {
+	root * /singing-website
+
+	encode gzip zstd
+
+	file_server
+
+	log {
+		output file /var/log/access.log
+	}
+}

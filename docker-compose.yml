@@ -12,6 +12,7 @@ services:
       - ./Caddyfile:/etc/caddy/Caddyfile
       - ./portfolio/build:/portfolio
       - ./finances-flask/build:/finances
+      - ./singing-website:/singing-website
       - ./bind-mounts/caddy/caddy_data:/data
       - ./bind-mounts/caddy/caddy_config:/config
       - ./bind-mounts/caddy/caddy_logs:/var/log

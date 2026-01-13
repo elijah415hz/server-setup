@@ -4,3 +4,6 @@
 [submodule "portfolio"]
 	path = portfolio
 	url = git@github.com:elijah415hz/portfolio.git
+[submodule "singing-website"]
+	path = singing-website
+	url = git@github.com:elijah415hz/singing-website.git
