@@ -164,6 +164,7 @@ services:
       - 'nextcloud.env'
       - 'cloud-backup-cron.env'
       - 'paperless.env'
+      - 'nightscout.env'
 
   devops:
     image: elijah415hz/server-devops:github-build
