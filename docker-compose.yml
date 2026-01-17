@@ -58,6 +58,7 @@ services:
       - ./finances-flask/cron:/usr/src/cron
     env_file:
       - 'finances.env'
+      - 'cloud-backup-cron.env'
 
   nextcloud:
     image: nextcloud:30

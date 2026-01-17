@@ -27,6 +27,12 @@ deploy-finances:
 	@echo "Deploying..."
 	docker compose up -d finances-app
 
+deploy-finances-cron:
+	@echo "Pulling image..."
+	docker compose pull finances-cron
+	@echo "Deploying..."
+	docker compose up -d finances-cron
+
 deploy-portfolio:
 	@echo "Updating..."
 	git pull
