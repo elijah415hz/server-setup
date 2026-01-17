@@ -18,7 +18,7 @@ services:
       - ./bind-mounts/caddy/caddy_logs:/var/log
 
   ddclient:
-    image: ghcr.io/linuxserver/ddclient:3.11.2
+    image: ghcr.io/linuxserver/ddclient:latest
     restart: always
     container_name: ddclient
     env_file:
@@ -61,7 +61,7 @@ services:
       - 'cloud-backup-cron.env'
 
   nextcloud:
-    image: nextcloud:30
+    image: nextcloud:32
     # networks:
     #   - caddy
     #   - nextcloud
@@ -85,7 +85,7 @@ services:
       - 'nextcloud.env'
 
   nextcloud-cron:
-    image: nextcloud:30
+    image: nextcloud:32
     restart: always
     container_name: nextcloud-cron
     # networks:
@@ -165,6 +165,7 @@ services:
       - 'nextcloud.env'
       - 'cloud-backup-cron.env'
       - 'paperless.env'
+      - 'nightscout.env'
 
   devops:
     image: elijah415hz/server-devops:github-build
