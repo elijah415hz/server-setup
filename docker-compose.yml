@@ -54,8 +54,6 @@ services:
     #   - finances
     restart: always
     container_name: finances-cron
-    volumes:
-      - ./finances-flask/cron:/usr/src/cron
     env_file:
       - 'finances.env'
       - 'cloud-backup-cron.env'
