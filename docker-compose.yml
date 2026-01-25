@@ -55,7 +55,6 @@ services:
     restart: always
     container_name: finances-cron
     volumes:
-      - ./finances-flask/cron:/usr/src/cron
       - ./bind-mounts/finances-cron/credentials:/usr/src/cron/credentials
     env_file:
       - 'finances.env'
