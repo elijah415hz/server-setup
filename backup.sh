@@ -48,13 +48,13 @@ else
     mv ./dump/nightscoutDB /usr/ServerBackup/bind-mounts/nightscout-db-backup
 fi
 
-rclone --config="/config/rclone/rclone.conf" copy /usr/ServerBackup bb:BlarvisServerBackup  --include /*.env &> /tmp/rclone-env-logs.txt
+rclone --config="/config/rclone/rclone.conf" copy /usr/ServerBackup bb:BlarvisServerBackup  --include /*.env --bwlimit "05:00,128k 00:00,off" &> /tmp/rclone-env-logs.txt
 if [ $? -ne 0 ]
 then
     sendMail "Rclone sync of env variables failed" /tmp/rclone-env-logs.txt
 fi
 
-rclone --config="/config/rclone/rclone.conf" sync /usr/ServerBackup/bind-mounts bb:BlarvisServerBackup/bind-mounts  --exclude /caddy/** --exclude /nextcloud_db/** &> /tmp/rclone-bind-mounts-logs.txt
+rclone --config="/config/rclone/rclone.conf" sync /usr/ServerBackup/bind-mounts bb:BlarvisServerBackup/bind-mounts  --exclude /caddy/** --exclude /nextcloud_db/** --bwlimit "05:00,128k 00:00,off" &> /tmp/rclone-bind-mounts-logs.txt
 if [ $? -ne 0 ]
 then
     sendMail "Rclone sync of bind-mounts failed" /tmp/rclone-bind-mounts-logs.txt
