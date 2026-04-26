@@ -92,6 +92,13 @@ paperless.elijahblaisdell.dev {
 	reverse_proxy paperless-webserver:8000
 }
 
+marketplace.elijahblaisdell.dev {
+	reverse_proxy marketplace-watcher:3000
+	log {
+		output file /var/log/access.log
+	}
+}
+
 # Serve singing website at main domain
 elijahblaisdell.com {
 	root * /singing-website

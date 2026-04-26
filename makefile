@@ -33,6 +33,12 @@ deploy-finances-cron:
 	@echo "Deploying..."
 	docker compose up -d finances-cron
 
+deploy-marketplace-watcher:
+	@echo "Pulling image..."
+	docker compose pull marketplace-watcher
+	@echo "Deploying..."
+	docker compose up -d marketplace-watcher
+
 deploy-portfolio:
 	@echo "Updating..."
 	git pull

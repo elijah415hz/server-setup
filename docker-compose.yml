@@ -176,6 +176,15 @@ services:
     env_file:
       - 'devops.env'
 
+  marketplace-watcher:
+    image: elijah415hz/marketplace-watcher:github-build
+    restart: always
+    container_name: marketplace-watcher
+    volumes:
+      - ./bind-mounts/marketplace-watcher/data:/data
+    env_file:
+      - 'marketplace-watcher.env'
+
   bitwarden:
     image: vaultwarden/server:latest
     # networks:
