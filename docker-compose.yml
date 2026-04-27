@@ -185,6 +185,16 @@ services:
     env_file:
       - 'marketplace-watcher.env'
 
+  tinyauth:
+    image: ghcr.io/steveiliop56/tinyauth:v5
+    restart: always
+    container_name: tinyauth
+    environment:
+      - TINYAUTH_APPURL=https://auth.elijahblaisdell.dev
+      - TINYAUTH_AUTH_SECURECOOKIE=true
+    env_file:
+      - 'tinyauth.env'
+
   bitwarden:
     image: vaultwarden/server:latest
     # networks:

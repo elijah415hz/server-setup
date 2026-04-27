@@ -1,4 +1,17 @@
 
+# Reusable forward_auth snippet for tinyauth-gated services
+(tinyauth_forwarder) {
+	forward_auth tinyauth:3000 {
+		uri /api/auth/caddy
+		copy_headers Remote-User Remote-Name Remote-Email Remote-Groups
+	}
+}
+
+# tinyauth login UI
+auth.elijahblaisdell.dev {
+	reverse_proxy tinyauth:3000
+}
+
 # Serve Portfolio at the test domain
 elijahblaisdell.dev {
 	# set the root directory
@@ -93,6 +106,7 @@ paperless.elijahblaisdell.dev {
 }
 
 marketplace.elijahblaisdell.dev {
+	import tinyauth_forwarder
 	reverse_proxy marketplace-watcher:3000
 	log {
 		output file /var/log/access.log
