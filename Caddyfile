@@ -3,6 +3,9 @@
 (tinyauth_forwarder) {
 	forward_auth tinyauth:3000 {
 		uri /api/auth/caddy
+		# Forward UA so tinyauth detects browser clients and returns 307+Location
+		# instead of 401+x-tinyauth-location.
+		header_up User-Agent {http.request.header.User-Agent}
 		copy_headers Remote-User Remote-Name Remote-Email Remote-Groups
 	}
 }
