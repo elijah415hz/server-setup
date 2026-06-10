@@ -1,6 +1,6 @@
 services:
   caddy:
-    image: caddy:latest
+    build: ./caddy
     # networks:
     #   - caddy
     restart: always
@@ -8,6 +8,8 @@ services:
     ports:
       - 80:80
       - 443:443
+    env_file:
+      - 'caddy.env'
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile
       - ./portfolio/build:/portfolio
@@ -16,15 +18,6 @@ services:
       - ./bind-mounts/caddy/caddy_data:/data
       - ./bind-mounts/caddy/caddy_config:/config
       - ./bind-mounts/caddy/caddy_logs:/var/log
-
-  ddclient:
-    image: ghcr.io/linuxserver/ddclient:latest
-    restart: always
-    container_name: ddclient
-    env_file:
-      - 'finances.env'
-    volumes:
-      - ./ddclient-config:/config
 
   finances-app:
     image: elijah415hz/finances-flask:github-build
