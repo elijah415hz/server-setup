@@ -19,6 +19,19 @@ services:
       - ./bind-mounts/caddy/caddy_config:/config
       - ./bind-mounts/caddy/caddy_logs:/var/log
 
+  # Local split-horizon DNS so home-network devices reach the services by their
+  # real hostnames without Tailscale (resolves *.elijahblaisdell.dev to the LAN
+  # IP). Point the router's DHCP DNS at the Pi (192.168.1.99) to use it.
+  dnsmasq:
+    image: 4km3/dnsmasq:latest
+    container_name: dnsmasq
+    restart: always
+    network_mode: host
+    cap_add:
+      - NET_ADMIN
+    volumes:
+      - ./dnsmasq/dnsmasq.conf:/etc/dnsmasq.conf:ro
+
   finances-app:
     image: elijah415hz/finances-flask:github-build
     # networks:
