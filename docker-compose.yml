@@ -1,6 +1,6 @@
 services:
   caddy:
-    image: caddy:latest
+    build: ./caddy
     # networks:
     #   - caddy
     restart: always
@@ -8,6 +8,8 @@ services:
     ports:
       - 80:80
       - 443:443
+    env_file:
+      - 'caddy.env'
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile
       - ./portfolio/build:/portfolio
@@ -17,14 +19,18 @@ services:
       - ./bind-mounts/caddy/caddy_config:/config
       - ./bind-mounts/caddy/caddy_logs:/var/log
 
-  ddclient:
-    image: ghcr.io/linuxserver/ddclient:latest
+  # Local split-horizon DNS so home-network devices reach the services by their
+  # real hostnames without Tailscale (resolves *.elijahblaisdell.dev to the LAN
+  # IP). Point the router's DHCP DNS at the Pi (192.168.1.99) to use it.
+  dnsmasq:
+    image: 4km3/dnsmasq:latest
+    container_name: dnsmasq
     restart: always
-    container_name: ddclient
-    env_file:
-      - 'finances.env'
+    network_mode: host
+    cap_add:
+      - NET_ADMIN
     volumes:
-      - ./ddclient-config:/config
+      - ./dnsmasq/dnsmasq.conf:/etc/dnsmasq.conf:ro
 
   finances-app:
     image: elijah415hz/finances-flask:github-build
@@ -135,6 +141,8 @@ services:
     #   - caddy
     restart: always
     container_name: nightscout
+    ports:
+      - '127.0.0.1:1337:1337'
     env_file:
       - 'nightscout.env'
 

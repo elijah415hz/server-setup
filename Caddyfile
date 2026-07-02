@@ -1,4 +1,15 @@
 
+# Global options: obtain/renew all certificates via the Porkbun DNS-01 ACME
+# challenge. This proves domain ownership through DNS TXT records instead of
+# inbound HTTP/TLS traffic, so certs work with no public exposure (server
+# reachable only over Tailscale). Credentials come from caddy.env.
+{
+	acme_dns porkbun {
+		api_key {env.PORKBUN_API_KEY}
+		api_secret_key {env.PORKBUN_API_SECRET_KEY}
+	}
+}
+
 # Reusable forward_auth snippet for tinyauth-gated services
 (tinyauth_forwarder) {
 	forward_auth tinyauth:3000 {
