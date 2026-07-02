@@ -141,6 +141,13 @@ services:
     #   - caddy
     restart: always
     container_name: nightscout
+    # Publish on the host loopback only so Tailscale Funnel (running on the host)
+    # can reach Nightscout to expose it to the public internet for the Alexa
+    # skill. Bound to 127.0.0.1 so it is NOT reachable from the LAN directly;
+    # only the local tailscaled/funnel and Caddy (via the docker network) can
+    # reach it.
+    ports:
+      - '127.0.0.1:1337:1337'
     env_file:
       - 'nightscout.env'
 
