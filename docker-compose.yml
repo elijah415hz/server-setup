@@ -179,6 +179,8 @@ services:
     image: elijah415hz/server-devops:github-build
     restart: always
     container_name: devops
+    ports:
+      - "127.0.0.1:8081:8080"
     volumes:
       - ./bind-mounts/devops/pipe:/webserver/pipe
     env_file:
